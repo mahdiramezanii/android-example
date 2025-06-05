@@ -26,8 +26,11 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,19 +53,37 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
-            AppCounter();
-
-
+            MainScreen()
         }
     }
 }
 
 
  @Composable
+ fun TextFieldCompose(){
+
+     var usernameField by remember { mutableStateOf(value = "") }
+
+     Column(modifier = Modifier
+         .background(color = Color.DarkGray)
+         .fillMaxSize(),
+         verticalArrangement = Arrangement.Center) {
+
+         TextField(value = usernameField, onValueChange ={
+             value ->
+             usernameField=value;
+         })
+
+     }
+ }
+
+
+ @Composable
  fun AppCounter(){
      var count by remember { mutableStateOf(value = 0) }
 
-     Column (modifier = Modifier.fillMaxWidth()
+     Column (modifier = Modifier
+         .fillMaxWidth()
          .fillMaxHeight(),
          horizontalAlignment = Alignment.CenterHorizontally,
          verticalArrangement = Arrangement.Center
@@ -81,9 +102,9 @@ class MainActivity : ComponentActivity() {
  fun BoxExamole(modifier: Modifier=Modifier){
 
     return Box(modifier = Modifier
-         .background(color = Color.Cyan)
-         .fillMaxHeight()
-         .fillMaxWidth()){
+        .background(color = Color.Cyan)
+        .fillMaxHeight()
+        .fillMaxWidth()){
          Box(modifier = Modifier
              .height(400.dp)
              .width(200.dp)
@@ -109,7 +130,9 @@ class MainActivity : ComponentActivity() {
  @Composable
  fun BoxExmaple(){
 
-     Box (contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth().fillMaxHeight()){
+     Box (contentAlignment = Alignment.Center, modifier = Modifier
+         .fillMaxWidth()
+         .fillMaxHeight()){
 
          Card (modifier = Modifier
              .height(500.dp)
@@ -123,7 +146,8 @@ class MainActivity : ComponentActivity() {
 
              Image(painter = painterResource(id = R.drawable.img),
                  contentDescription = "Profile"
-                 , modifier = Modifier.fillMaxWidth()
+                 , modifier = Modifier
+                     .fillMaxWidth()
                      .fillMaxWidth())
          }
 
